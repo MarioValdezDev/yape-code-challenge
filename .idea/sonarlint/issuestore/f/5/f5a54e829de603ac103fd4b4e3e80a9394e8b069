@@ -1,0 +1,2 @@
+
+สkotlin:S65328"ฑReplace this if expression with check(lifecycle.currentState.isAtLeast(Lifecycle.State.INITIALIZED)) { "Should not attempt to get bindings when Fragment views are destroyed." }.(งาอ

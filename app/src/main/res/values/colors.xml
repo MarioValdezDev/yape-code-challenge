@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="colorPrimary">@color/primaryColor</color>
+    <color name="colorPrimaryDark">@color/gray</color>
+    <color name="colorAccent">@color/SecondaryColor</color>
+
+    <color name="primaryColor">#5fbcd3</color>
+    <color name="primaryLightColor">#86C5D5</color>
+    <color name="primaryColorDark">#36B5D5</color>
+    <color name="SecondaryColor">#2D3277</color>
+    <color name="PurpleGrey40">#FF625b71</color>
+    <color name="gray">#616161</color>
+    <color name="green_light">#28b16a</color>
+    <color name="skeleton">#CC5D6771</color>
+</resources>
