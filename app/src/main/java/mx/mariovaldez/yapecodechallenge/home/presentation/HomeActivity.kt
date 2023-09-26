@@ -2,20 +2,27 @@ package mx.mariovaldez.yapecodechallenge.home.presentation
 
 import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
+import android.view.MenuItem.OnActionExpandListener
 import androidx.activity.viewModels
-import androidx.core.content.ContentProviderCompat.requireContext
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.DividerItemDecoration
 import dagger.hilt.android.AndroidEntryPoint
+import mx.mariovaldez.yapecodechallenge.R
 import mx.mariovaldez.yapecodechallenge.databinding.ActivityHomeBinding
+import mx.mariovaldez.yapecodechallenge.details.presentation.DetailsActivity
 import mx.mariovaldez.yapecodechallenge.home.presentation.adapter.RecipesListAdapter
 import mx.mariovaldez.yapecodechallenge.home.presentation.models.RecipeUI
 import mx.mariovaldez.yapecodechallenge.ktx.exhaustive
 import mx.mariovaldez.yapecodechallenge.ktx.gone
+import mx.mariovaldez.yapecodechallenge.ktx.hideKeyboard
 import mx.mariovaldez.yapecodechallenge.ktx.observe
 import mx.mariovaldez.yapecodechallenge.ktx.viewBinding
 import mx.mariovaldez.yapecodechallenge.ktx.visible
+
 
 @AndroidEntryPoint
 class HomeActivity : AppCompatActivity() {
@@ -30,6 +37,7 @@ class HomeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
+        setupViews()
         setupObservers()
         viewModel.fetchData()
     }
@@ -49,23 +57,22 @@ class HomeActivity : AppCompatActivity() {
     }
 
     private fun showData(recipes: List<RecipeUI>) {
-        recipesListAdapter = RecipesListAdapter() {
-
+        recipesListAdapter = RecipesListAdapter { recipe ->
+            hideKeyboard()
+            navigateToDetails(recipe)
         }.apply {
             addRecipes(recipes)
         }
         with(binding.productsRecyclerView) {
             adapter = recipesListAdapter
-            addItemDecoration(
-                DividerItemDecoration(
-                    context,
-                    DividerItemDecoration.VERTICAL
-                )
-            )
             setHasFixedSize(true)
         }
         binding.productsRecyclerView.visible()
         hideProgress()
+    }
+
+    private fun navigateToDetails(recipe: RecipeUI) {
+        DetailsActivity.launch(this, recipe)
     }
 
     private fun showProgress() {
@@ -81,8 +88,33 @@ class HomeActivity : AppCompatActivity() {
             skeleton.root.gone()
             skeleton.root.stopShimmer()
             productsRecyclerView.visible()
-
         }
+    }
+
+    private fun setupViews() {
+        supportActionBar?.title = "Home"
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        val inflater = menuInflater
+        inflater.inflate(R.menu.search_menu, menu)
+        val searchItem = menu.findItem(R.id.actionSearch)
+        val searchView: SearchView? = searchItem.actionView as SearchView?
+
+        searchView?.isIconified = false
+        searchView?.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                hideKeyboard()
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                viewModel.filterRecipes(newText)
+                return true
+            }
+        })
+
+        return true
     }
 
     companion object {

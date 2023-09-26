@@ -21,20 +21,18 @@ internal class RecipesListAdapter(
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(recipe: RecipeUI) {
             with(binding) {
-                println(recipe.image)
+
                 imageView.load(recipe.image) {
                     crossfade(750)
                     placeholder(R.drawable.icv_recipe_icon)
                     scale(Scale.FILL)
                 }
-
                 recipeNameTextView.text = recipe.label
                 binding.root.setOnClickListener {
                     listener(recipe)
                 }
             }
         }
-
     }
 
     override fun onCreateViewHolder(
@@ -56,6 +54,7 @@ internal class RecipesListAdapter(
 
     @SuppressLint("NotifyDataSetChanged")
     internal fun addRecipes(recipes: List<RecipeUI>) {
+        this.recipes.clear()
         this.recipes.addAll(recipes)
         notifyDataSetChanged()
     }
