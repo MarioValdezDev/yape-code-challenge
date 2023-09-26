@@ -11,7 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.02" />
+        app:layout_constraintGuide_percent="0.016" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/sections_end_guideline"
@@ -19,10 +19,6 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.98" />
-
-    <include
-        android:id="@+id/toolbar"
-        layout="@layout/layout_toolbar" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/products_recycler_view"
@@ -38,9 +34,9 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@id/sections_end_guideline"
         app:layout_constraintStart_toStartOf="@id/sections_start_guideline"
-        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        app:layout_constraintTop_toTopOf="parent"
         tools:listitem="@layout/item_recipe"
-        tools:visibility="gone" />
+        android:visibility="gone"/>
 
     <include
         android:id="@+id/skeleton"
@@ -51,6 +47,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/sections_end_guideline"
         app:layout_constraintStart_toStartOf="@+id/sections_start_guideline"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

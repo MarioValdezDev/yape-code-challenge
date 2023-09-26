@@ -32,7 +32,7 @@
             app:layout_constraintGuide_percent="0.9" />
 
         <ImageView
-            android:id="@+id/cancel_button"
+            android:id="@+id/search_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:contentDescription="@string/app_name"
@@ -40,37 +40,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/end_guideline"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/icv_cancel" />
-
-        <com.google.android.material.textfield.TextInputLayout
-
-            android:id="@+id/search_text_input_layout"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:textColorHint="@color/gray"
-            app:boxBackgroundColor="@color/white"
-            app:boxStrokeWidth="0dp"
-            app:hintEnabled="false"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@id/end_guideline"
-            app:layout_constraintStart_toStartOf="@id/start_guideline"
-            app:layout_constraintTop_toTopOf="parent"
-            app:startIconDrawable="@drawable/icv_search">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/search_text_input_edit_text"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Buscar en Mercado Libre"
-                android:imeOptions="actionSearch"
-                android:inputType="text"
-                android:lines="1"
-                android:maxLength="100"
-                android:textColor="@color/black"
-                android:textSize="@dimen/s_text_size" />
-
-        </com.google.android.material.textfield.TextInputLayout>
+            app:srcCompat="@drawable/icv_search"
+            app:tint="@color/white" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

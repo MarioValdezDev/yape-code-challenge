@@ -13,6 +13,7 @@
     <dimen name="xxxs_text_size">6sp</dimen>
 
     <!-- Margins -->
+    <dimen name="margin_zero">0dp</dimen>
     <dimen name="xxl_margin">64dp</dimen>
     <dimen name="xl_margin">32dp</dimen>
     <dimen name="l_margin">24dp</dimen>
@@ -34,31 +35,6 @@
 
     <dimen name="card_view_icon_size">32dp</dimen>
     <dimen name="card_view_card_icon_size">28dp</dimen>
-    <dimen name="section_view_icon_size">24dp</dimen>
-
-    <!-- Home Activity -->
-    <dimen name="home_act_drawer_layout_width">260dp</dimen>
-    <dimen name="home_act_option_icon_size">24dp</dimen>
-    <dimen name="home_act_logo_width">100dp</dimen>
-    <dimen name="home_act_logo_height">24dp</dimen>
-
-    <!-- Card View -->
-    <dimen name="card_view_large_icon_translation_y">-70dp</dimen>
-    <dimen name="card_view_large_icon_translation_x">50dp</dimen>
-
-    <!-- Skeleton -->
-    <dimen name="card_skeleton_height">170dp</dimen>
-    <dimen name="movements_skeleton_date_header_height">32dp</dimen>
-    <dimen name="movements_skeleton_movement_height">59dp</dimen>
-    <dimen name="date_movements_skeleton_width">120dp</dimen>
-
-    <!-- Blocking Load View -->
-    <dimen name="blocking_load_view_logo_size">80dp</dimen>
-
-    <dimen name="dynamic_screen_dialog_icon_size">60dp</dimen>
-    <dimen name="help_act_icon_size">80dp</dimen>
-    <dimen name="country_icon_size">40dp</dimen>
-    <dimen name="confirmation_dialog_pin_box_size">44dp</dimen>
 
     <!--Buttons-->
     <dimen name="default_button_size">70dp</dimen>

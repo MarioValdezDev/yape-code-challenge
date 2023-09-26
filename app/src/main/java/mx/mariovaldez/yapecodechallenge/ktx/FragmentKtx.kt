@@ -1,5 +1,6 @@
 package mx.mariovaldez.yapecodechallenge.ktx
 
+import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.viewbinding.ViewBinding
@@ -16,3 +17,8 @@ fun Fragment.hideKeyboard() {
 fun Fragment.showKeyboard(searchTextInputEditText: TextInputEditText) {
     view?.let { activity?.showKeyboard(searchTextInputEditText) }
 }
+
+inline fun <T : Fragment> T.withArgs(argsBuilder: Bundle.() -> Unit): T =
+    this.apply {
+        arguments = Bundle().apply(argsBuilder)
+    }
