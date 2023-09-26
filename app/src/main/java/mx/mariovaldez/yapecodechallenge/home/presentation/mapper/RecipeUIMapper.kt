@@ -2,7 +2,6 @@ package mx.mariovaldez.yapecodechallenge.home.presentation.mapper
 
 import mx.mariovaldez.yapecodechallenge.domain.mapper.Mapper
 import mx.mariovaldez.yapecodechallenge.home.data.models.Recipe
-import mx.mariovaldez.yapecodechallenge.home.presentation.models.IngredientUI
 import mx.mariovaldez.yapecodechallenge.home.presentation.models.RecipeUI
 import mx.mariovaldez.yapecodechallenge.ktx.getId
 import javax.inject.Inject
@@ -20,7 +19,9 @@ internal class RecipeUIMapper @Inject constructor(
             ingredients = ingredientUIMapper.map(ingredients),
             calories = calories,
             totalWeight = totalWeight,
-            //locale = locale,
+            description = description,
+            longitude = longitude,
+            latitude = latitude
         )
     }
 }

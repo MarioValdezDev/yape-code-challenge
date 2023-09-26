@@ -6,6 +6,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
+import mx.mariovaldez.yapecodechallenge.home.domain.usecase.FilterRecipes
 import mx.mariovaldez.yapecodechallenge.home.domain.usecase.GetRecipes
 import mx.mariovaldez.yapecodechallenge.home.presentation.models.RecipeUI
 import javax.inject.Inject
@@ -13,9 +14,11 @@ import javax.inject.Inject
 @HiltViewModel
 internal class HomeViewModel @Inject constructor(
     private val getRecipes: GetRecipes,
+    private val filterRecipes: FilterRecipes,
 ) : ViewModel() {
 
 
+    private lateinit var recipes: List<RecipeUI>
     private val _state: MutableStateFlow<State> = MutableStateFlow(State.Loading)
     val state: StateFlow<State> get() = _state
 
@@ -26,6 +29,7 @@ internal class HomeViewModel @Inject constructor(
             }
                 .onSuccess {
                     //println(it)
+                    recipes = it
                     _state.value = State.Success(it)
                 }
                 .onFailure {
@@ -33,6 +37,13 @@ internal class HomeViewModel @Inject constructor(
                     _state.value = State.Error
                 }
         }
+    }
+
+    fun filterRecipes(newText: String?) {
+        _state.value = State.Success(
+            if (!newText.isNullOrBlank()) filterRecipes(newText, recipes)
+            else recipes
+        )
     }
 
     sealed class State {
