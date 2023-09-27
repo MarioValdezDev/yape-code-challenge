@@ -14,9 +14,8 @@ import javax.inject.Inject
 @HiltViewModel
 internal class HomeViewModel @Inject constructor(
     private val getRecipes: GetRecipes,
-    private val filterRecipes: FilterRecipes,
+    private val filterRecipes: FilterRecipes
 ) : ViewModel() {
-
 
     private lateinit var recipes: List<RecipeUI>
     private val _state: MutableStateFlow<State> = MutableStateFlow(State.Loading)
@@ -28,7 +27,7 @@ internal class HomeViewModel @Inject constructor(
                 getRecipes()
             }
                 .onSuccess {
-                    //println(it)
+                    // println(it)
                     recipes = it
                     _state.value = State.Success(it)
                 }
@@ -41,8 +40,11 @@ internal class HomeViewModel @Inject constructor(
 
     fun filterRecipes(newText: String?) {
         _state.value = State.Success(
-            if (!newText.isNullOrBlank()) filterRecipes(newText, recipes)
-            else recipes
+            if (!newText.isNullOrBlank()) {
+                filterRecipes(newText, recipes)
+            } else {
+                recipes
+            }
         )
     }
 

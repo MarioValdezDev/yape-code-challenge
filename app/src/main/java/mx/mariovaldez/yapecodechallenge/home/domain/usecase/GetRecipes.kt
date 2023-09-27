@@ -8,7 +8,7 @@ import javax.inject.Inject
 
 internal class GetRecipes @Inject constructor(
     private val repository: HomeRepository,
-    private val defaultDispatcherProvider: DefaultDispatcherProvider,
+    private val defaultDispatcherProvider: DefaultDispatcherProvider
 ) {
 
     suspend operator fun invoke(): List<RecipeUI> = withContext(defaultDispatcherProvider.default) {

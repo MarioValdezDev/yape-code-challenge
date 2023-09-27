@@ -1,9 +1,9 @@
 package mx.mariovaldez.yapecodechallenge.data.remote.mappers
 
 import com.google.gson.Gson
-import mx.mariovaldez.yapecodechallenge.domain.mapper.Mapper
 import mx.mariovaldez.yapecodechallenge.data.remote.models.ClientException
 import mx.mariovaldez.yapecodechallenge.data.remote.models.ErrorBody
+import mx.mariovaldez.yapecodechallenge.domain.mapper.Mapper
 import retrofit2.HttpException
 import java.io.IOException
 import javax.inject.Inject

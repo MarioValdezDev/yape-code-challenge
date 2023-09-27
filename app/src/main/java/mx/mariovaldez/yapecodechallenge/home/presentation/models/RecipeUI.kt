@@ -14,7 +14,7 @@ data class RecipeUI(
     val calories: Number,
     val totalWeight: Number,
     val latitude: Number,
-    val longitude: Number,
+    val longitude: Number
 ) : Serializable
 
 data class IngredientUI(

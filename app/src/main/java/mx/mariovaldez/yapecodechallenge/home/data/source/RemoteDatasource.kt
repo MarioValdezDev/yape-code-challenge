@@ -5,7 +5,7 @@ import mx.mariovaldez.yapecodechallenge.home.data.models.Recipe
 import javax.inject.Inject
 
 internal class RemoteDatasource @Inject constructor(
-    private val apiServices: ApiServices,
+    private val apiServices: ApiServices
 ) {
 
     suspend fun getRecipes(): List<Recipe> = apiServices.getRecipes()

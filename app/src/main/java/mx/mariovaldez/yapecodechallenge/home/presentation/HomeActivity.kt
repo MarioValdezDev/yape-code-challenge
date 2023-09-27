@@ -4,12 +4,9 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
-import android.view.MenuItem
-import android.view.MenuItem.OnActionExpandListener
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
-import androidx.recyclerview.widget.DividerItemDecoration
 import dagger.hilt.android.AndroidEntryPoint
 import mx.mariovaldez.yapecodechallenge.R
 import mx.mariovaldez.yapecodechallenge.databinding.ActivityHomeBinding
@@ -22,7 +19,6 @@ import mx.mariovaldez.yapecodechallenge.ktx.hideKeyboard
 import mx.mariovaldez.yapecodechallenge.ktx.observe
 import mx.mariovaldez.yapecodechallenge.ktx.viewBinding
 import mx.mariovaldez.yapecodechallenge.ktx.visible
-
 
 @AndroidEntryPoint
 class HomeActivity : AppCompatActivity() {
@@ -63,11 +59,11 @@ class HomeActivity : AppCompatActivity() {
         }.apply {
             addRecipes(recipes)
         }
-        with(binding.productsRecyclerView) {
+        with(binding.recipesRecyclerView) {
             adapter = recipesListAdapter
             setHasFixedSize(true)
         }
-        binding.productsRecyclerView.visible()
+        binding.recipesRecyclerView.visible()
         hideProgress()
     }
 
@@ -79,7 +75,7 @@ class HomeActivity : AppCompatActivity() {
         with(binding) {
             skeleton.root.startShimmer()
             skeleton.root.visible()
-            productsRecyclerView.gone()
+            recipesRecyclerView.gone()
         }
     }
 
@@ -87,7 +83,7 @@ class HomeActivity : AppCompatActivity() {
         with(binding) {
             skeleton.root.gone()
             skeleton.root.stopShimmer()
-            productsRecyclerView.visible()
+            recipesRecyclerView.visible()
         }
     }
 

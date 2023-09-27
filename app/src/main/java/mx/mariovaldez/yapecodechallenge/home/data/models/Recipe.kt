@@ -12,7 +12,7 @@ data class Recipe(
     val calories: Number,
     val totalWeight: Number,
     val latitude: Number,
-    val longitude: Number,
+    val longitude: Number
 )
 
 data class Ingredient(

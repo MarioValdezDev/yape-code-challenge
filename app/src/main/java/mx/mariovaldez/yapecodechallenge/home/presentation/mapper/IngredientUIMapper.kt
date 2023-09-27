@@ -8,7 +8,11 @@ import javax.inject.Inject
 internal class IngredientUIMapper @Inject constructor() : Mapper<Ingredient, IngredientUI> {
     override fun map(value: Ingredient): IngredientUI = with(value) {
         IngredientUI(
-            text, weight, foodCategory, foodId, image
+            text,
+            weight,
+            foodCategory,
+            foodId,
+            image
         )
     }
 }

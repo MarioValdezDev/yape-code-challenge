@@ -23,7 +23,6 @@ import mx.mariovaldez.yapecodechallenge.details.presentation.adapters.LabelListA
 import mx.mariovaldez.yapecodechallenge.home.presentation.models.RecipeUI
 import mx.mariovaldez.yapecodechallenge.ktx.viewBinding
 
-
 @AndroidEntryPoint
 class DetailsActivity : AppCompatActivity() {
 
@@ -33,23 +32,18 @@ class DetailsActivity : AppCompatActivity() {
     private lateinit var healthLabels: LabelListAdapter
     private lateinit var ingredientsLabels: LabelListAdapter
 
-    private val viewModel: DetailsViewModel by viewModels()
+    private val viewModel: DetailsViewModel by viewModels() // this is going to be used soon
 
-    // private lateinit var bottomSheetBehavior: BottomSheetBehavior<BottomSheetDialogFragment>
     private lateinit var recipeUI: RecipeUI
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
 
         setContentView(binding.root)
         recipeUI = intent.extras?.get(RECIPE_KEY) as RecipeUI
         setupViews()
         setupListeners()
         showData(recipeUI)
-        //val mapFragment = supportFragmentManager.findFragmentById(R.id.map) as? SupportMapFragment
-        //mapFragment?.getMapAsync(this)
-
     }
 
     private fun setupListeners() {
@@ -108,14 +102,15 @@ class DetailsActivity : AppCompatActivity() {
         }
     }
 
-
     companion object {
 
-        fun launch(from: Context, recipe: RecipeUI) = from.startActivity(Intent(
-            from,
-            DetailsActivity::class.java
-        ).apply {
-            putExtra(RECIPE_KEY, recipe)
-        })
+        fun launch(from: Context, recipe: RecipeUI) = from.startActivity(
+            Intent(
+                from,
+                DetailsActivity::class.java
+            ).apply {
+                putExtra(RECIPE_KEY, recipe)
+            }
+        )
     }
 }
