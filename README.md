@@ -1,4 +1,4 @@
-## Mercado Libre Code Challenge
+## Yape Code Challenge
 This repository contains code challenge from Yape, created by Mario Valdez.
 
 ## Description
