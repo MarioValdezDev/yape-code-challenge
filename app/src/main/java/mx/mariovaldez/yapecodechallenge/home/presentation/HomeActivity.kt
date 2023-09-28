@@ -3,12 +3,12 @@ package mx.mariovaldez.yapecodechallenge.home.presentation
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.view.Menu
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.SearchView
+import androidx.core.widget.addTextChangedListener
 import dagger.hilt.android.AndroidEntryPoint
-import mx.mariovaldez.yapecodechallenge.R
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.runBlocking
 import mx.mariovaldez.yapecodechallenge.databinding.ActivityHomeBinding
 import mx.mariovaldez.yapecodechallenge.details.presentation.DetailsActivity
 import mx.mariovaldez.yapecodechallenge.home.presentation.adapter.RecipesListAdapter
@@ -46,10 +46,24 @@ class HomeActivity : AppCompatActivity() {
 
     private fun handle(state: HomeViewModel.State) {
         when (state) {
-            HomeViewModel.State.Error -> {}
+            HomeViewModel.State.Error -> {
+                runBlocking {
+                    delay(2000)
+                    showError()
+                }
+            }
+
             HomeViewModel.State.Loading -> showProgress()
             is HomeViewModel.State.Success -> showData(state.recipes)
         }.exhaustive
+    }
+
+    private fun showError() {
+        with(binding) {
+            skeleton.root.gone()
+            recipesRecyclerView.gone()
+            errorLayout.errorContainer.visible()
+        }
     }
 
     private fun showData(recipes: List<RecipeUI>) {
@@ -76,6 +90,7 @@ class HomeActivity : AppCompatActivity() {
             skeleton.root.startShimmer()
             skeleton.root.visible()
             recipesRecyclerView.gone()
+            errorLayout.errorContainer.gone()
         }
     }
 
@@ -84,33 +99,31 @@ class HomeActivity : AppCompatActivity() {
             skeleton.root.gone()
             skeleton.root.stopShimmer()
             recipesRecyclerView.visible()
+            errorLayout.errorContainer.gone()
         }
     }
 
     private fun setupViews() {
-        supportActionBar?.title = "Home"
-    }
+        with(binding) {
+            errorLayout.tryAgainButton.setOnClickListener {
+                viewModel.fetchData()
+            }
+            searchTextInputEditText.addTextChangedListener {
+                viewModel.filterRecipes(it.toString())
+            }
 
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        val inflater = menuInflater
-        inflater.inflate(R.menu.search_menu, menu)
-        val searchItem = menu.findItem(R.id.actionSearch)
-        val searchView: SearchView? = searchItem.actionView as SearchView?
-
-        searchView?.isIconified = false
-        searchView?.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(query: String?): Boolean {
+            toolbar.searchButton.setOnClickListener {
+                searchTextInputLayout.visible()
+                toolbar.searchButton.gone()
+            }
+            searchTextInputLayout.setEndIconOnClickListener {
                 hideKeyboard()
-                return true
+                searchTextInputEditText.setText("")
+                searchTextInputLayout.gone()
+                toolbar.searchButton.visible()
+                hideKeyboard()
             }
-
-            override fun onQueryTextChange(newText: String?): Boolean {
-                viewModel.filterRecipes(newText)
-                return true
-            }
-        })
-
-        return true
+        }
     }
 
     companion object {
