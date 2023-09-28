@@ -7,7 +7,7 @@ import javax.inject.Inject
 
 internal class HomeRepository @Inject constructor(
     private val remoteDatasource: RemoteDatasource,
-    private val recipeUIMapper: RecipeUIMapper,
+    private val recipeUIMapper: RecipeUIMapper
 ) {
 
     suspend fun getRecipes(): List<RecipeUI> =
