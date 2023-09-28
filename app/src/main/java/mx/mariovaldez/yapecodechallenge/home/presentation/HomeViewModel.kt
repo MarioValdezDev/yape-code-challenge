@@ -17,17 +17,17 @@ internal class HomeViewModel @Inject constructor(
     private val filterRecipes: FilterRecipes
 ) : ViewModel() {
 
-    private lateinit var recipes: List<RecipeUI>
+    private var recipes: List<RecipeUI> = emptyList()
     private val _state: MutableStateFlow<State> = MutableStateFlow(State.Loading)
     val state: StateFlow<State> get() = _state
 
     fun fetchData() {
+        _state.value = State.Loading
         viewModelScope.launch {
             kotlin.runCatching {
                 getRecipes()
             }
                 .onSuccess {
-                    // println(it)
                     recipes = it
                     _state.value = State.Success(it)
                 }
@@ -39,13 +39,15 @@ internal class HomeViewModel @Inject constructor(
     }
 
     fun filterRecipes(newText: String?) {
-        _state.value = State.Success(
-            if (!newText.isNullOrBlank()) {
-                filterRecipes(newText, recipes)
-            } else {
-                recipes
-            }
-        )
+        if (recipes.isNotEmpty()) {
+            _state.value = State.Success(
+                if (!newText.isNullOrBlank()) {
+                    filterRecipes(newText, recipes)
+                } else {
+                    recipes
+                }
+            )
+        }
     }
 
     sealed class State {

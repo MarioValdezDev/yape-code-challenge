@@ -20,6 +20,35 @@
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.98" />
 
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/layout_toolbar" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/search_text_input_layout"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/default_margin"
+        android:hint="@string/search"
+        android:visibility="gone"
+        app:endIconDrawable="@drawable/icv_cancel"
+        app:endIconMode="custom"
+        app:layout_constraintEnd_toEndOf="@id/sections_end_guideline"
+        app:layout_constraintStart_toStartOf="@id/sections_start_guideline"
+        app:layout_constraintTop_toBottomOf="@id/toolbar">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/search_text_input_edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:focusedByDefault="false"
+            android:inputType="text"
+            android:lines="1"
+            android:maxLength="100" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recipes_recycler_view"
         android:layout_width="0dp"
@@ -30,13 +59,13 @@
         android:requiresFadingEdge="vertical"
         android:scrollbarSize="0dp"
         android:scrollbars="vertical"
+        android:visibility="gone"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@id/sections_end_guideline"
         app:layout_constraintStart_toStartOf="@id/sections_start_guideline"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:listitem="@layout/item_recipe"
-        android:visibility="gone"/>
+        app:layout_constraintTop_toBottomOf="@id/search_text_input_layout"
+        tools:listitem="@layout/item_recipe" />
 
     <include
         android:id="@+id/skeleton"
@@ -47,6 +76,17 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/sections_end_guideline"
         app:layout_constraintStart_toStartOf="@+id/sections_start_guideline"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/search_text_input_layout" />
+
+    <include
+        android:id="@+id/error_layout"
+        layout="@layout/layout_error"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/sections_end_guideline"
+        app:layout_constraintStart_toStartOf="@+id/sections_start_guideline"
+        app:layout_constraintTop_toBottomOf="@id/search_text_input_layout" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
