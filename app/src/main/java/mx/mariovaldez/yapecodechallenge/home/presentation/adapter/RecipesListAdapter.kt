@@ -11,7 +11,7 @@ import mx.mariovaldez.yapecodechallenge.databinding.ItemRecipeBinding
 import mx.mariovaldez.yapecodechallenge.home.presentation.models.RecipeUI
 
 internal class RecipesListAdapter(
-    private val listener: (recipe: RecipeUI) -> Unit,
+    private val listener: (recipe: RecipeUI) -> Unit
 ) : RecyclerView.Adapter<RecipesListAdapter.ViewHolder>() {
 
     private val recipes = mutableListOf<RecipeUI>()
@@ -21,7 +21,6 @@ internal class RecipesListAdapter(
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(recipe: RecipeUI) {
             with(binding) {
-
                 imageView.load(recipe.image) {
                     crossfade(750)
                     placeholder(R.drawable.icv_recipe_icon)

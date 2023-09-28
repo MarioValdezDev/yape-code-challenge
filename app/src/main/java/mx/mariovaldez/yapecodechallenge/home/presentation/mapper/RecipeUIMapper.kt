@@ -7,7 +7,7 @@ import mx.mariovaldez.yapecodechallenge.ktx.getId
 import javax.inject.Inject
 
 internal class RecipeUIMapper @Inject constructor(
-    private val ingredientUIMapper: IngredientUIMapper,
+    private val ingredientUIMapper: IngredientUIMapper
 ) : Mapper<Recipe, RecipeUI> {
     override fun map(value: Recipe): RecipeUI = with(value) {
         RecipeUI(
